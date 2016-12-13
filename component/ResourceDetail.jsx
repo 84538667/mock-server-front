@@ -1,5 +1,6 @@
 import React from 'react'
 import Mixin from '../common/Mixin.jsx'
+import JsonEditor from './JsonEditor'
 import { Row, Col, Button, Input, Popconfirm } from 'antd';
 const ButtonGroup = Button.Group;
 
@@ -57,23 +58,11 @@ const Resource = React.createClass({
     			</Col>
     		</Row>
     		<div style={{margin:20}}>
-    		{
-    			this.state.edit
-    			?
-    			<div>
-			    	<Row>
-			    		<Col span="20" offset="2">
-			    			<Input value={this.state.currentData} onChange={this.onJsonDataChange}/>
-			    		</Col>
-			    	</Row>
-		    	</div>
-    			:
-		    	<Row style={{backgroundColor:"#F7F7F9"}}>
+		    	<Row >
 		    		<Col span="20" offset="2">
-		    			{innerData}
+                        <JsonEditor value={this.state.currentData} view={!this.state.edit} onChange={this.onJsonDataChange}/>
 		    		</Col>
 		    	</Row>
-    		}
     		</div>
     		<div style={{margin:20, backgroundColor:"#F7F7F9", padding:10, fontSize:16}}>
     			{testShell}
@@ -81,8 +70,10 @@ const Resource = React.createClass({
     </div>)
   },
 
-  onJsonDataChange(e){
-  	this.setState({currentData : e.target.value});
+  onJsonDataChange(value){
+  	this.state.currentData = value
+        .replace(/\n/g, '')
+        .replace(/ /g, '');
   },
 
   onEditClick(){
