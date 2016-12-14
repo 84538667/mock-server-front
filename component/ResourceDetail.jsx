@@ -37,7 +37,8 @@ const Resource = React.createClass({
 
   	const testShell = "curl -v -X " + this.props.method + " http://localhost:8888/" + this.props.url + (this.props.data.fileStatusCode != "200" ? "?__statusCode=" + this.props.data.fileStatusCode : "");
 
-  	const innerData = JSON.stringify(this.props.data.fileData);
+    const editorKey = this.props.method+this.props.url;
+
     return (<div style={{border:"1px solid #e9e9e9", borderRadius:5}}>
     		<Row  style={{margin:20}}>
     			<Col offset="1" span="8">
@@ -60,7 +61,7 @@ const Resource = React.createClass({
     		<div style={{margin:20}}>
 		    	<Row >
 		    		<Col span="20" offset="2">
-                        <JsonEditor value={this.state.currentData} view={!this.state.edit} onChange={this.onJsonDataChange}/>
+                        <JsonEditor value={this.state.currentData} view={!this.state.edit} onChange={this.onJsonDataChange} uniqueKey={editorKey}/>
 		    		</Col>
 		    	</Row>
     		</div>

@@ -19,7 +19,7 @@ const Resource = React.createClass({
 
     componentDidMount(){
         if(!this.state.editor){
-            const container = document.getElementById('jsoneditor');
+            const container = document.getElementById('jsoneditor' + this.props.uniqueKey);
             const that = this;
             var options = {
                 mode: this.props.view ? 'view' : 'code',
@@ -33,8 +33,9 @@ const Resource = React.createClass({
     },
 
     render() {
+        const jsoneditorId = "jsoneditor" + this.props.uniqueKey;
         return (<div>
-            <div id="jsoneditor" style={{height:400}}></div>
+            <div id={jsoneditorId} style={{height:400}}></div>
         </div>)
     },
 
